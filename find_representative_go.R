@@ -91,6 +91,6 @@ repr_GO$pvalues <- sapply(repr_GO$pvalues, function(x) paste(x, collapse = ","))
 repr_GO$gos <- sapply(repr_GO$gos, function(x) paste(x, collapse = ","))
 
 ## Write results to a file
-write.table(repr_GO, out_file, sep='\t', row.names=FALSE)
+write.table(repr_GO, out_file, sep='\t', row.names=FALSE, quote=FALSE)
 
 
