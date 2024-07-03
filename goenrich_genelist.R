@@ -58,8 +58,8 @@ if (is.null(universe_file)) {
     pvalueCutoff  = 1,
     qvalueCutoff  = 1,
     pAdjustMethod = "BH",
-    # minGSSize     = 40,
-    # maxGSSize     = 400,
+    minGSSize     = 40,
+    maxGSSize     = 400,
     # universe = na.omit(file_df[(file_df$mk.raw.p.value != 1), ])$gene
     universe = universe
     )
@@ -69,7 +69,7 @@ if (is.null(universe_file)) {
 
 # enrich_filt = gofilter(enrich_res, level=5)
 enrich_filt = enrich_res
-enrich_filt = simplify(enrich_res, cutoff=0.5, by="p.adjust", select_fun=min)
+# enrich_filt = simplify(enrich_res, cutoff=0.5, by="p.adjust", select_fun=min)
 enrich_result = enrich_filt@result
 
 # enrich_out_file = paste0(enrich_outdir, dos, '.enrichGO.tsv')

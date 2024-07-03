@@ -54,7 +54,8 @@ for (dos in c('pos', 'neg')) {
   
   # enrich_result = enrich_res@result
   # enrich_result = gofilter(enrich_res, level=4)
-  enrich_filt = simplify(enrich_res, cutoff=0.5, by="p.adjust", select_fun=min)
+  # enrich_filt = simplify(enrich_res, cutoff=0.5, by="p.adjust", select_fun=min)
+  enrich_filt = enrich_res
   enrich_result = enrich_filt@result
 
   # enrich_out_file = paste0(enrich_outdir, dos, '.enrichGO.tsv')
