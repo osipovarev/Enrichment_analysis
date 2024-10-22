@@ -14,8 +14,9 @@ suppressPackageStartupMessages(library(ggplot2))
 ## Initiate argument parser
 parser = ArgumentParser()
 parser$add_argument("-w", "--workdir", type="character", help="abs path to work (current) dir")
-parser$add_argument("-p", "--pcutoff", type="numeric", default=0.1, help="p-value cutoff on the input values; default=0.1")
 parser$add_argument("-g", "--genetab", type="character", help="table (.tsv) from Degenotate MK test")
+parser$add_argument("-p", "--pcutoff", type="numeric", default=0.1, help="p-value cutoff on the input values; default=0.1")
+parser$add_argument("-c", "--mincount", type="integer", default=3, help="min Hit count for a term to be reported; default: 3")
 parser$add_argument("-o", "--outdir", type="character", help="output dir name (adj p-value cutoff <.01) to put files .enrichGO.tsv")
 args = parser$parse_args()
 
@@ -25,6 +26,7 @@ setwd(curr_dir)
 file_name = args$genetab
 enrich_outdir = args$outdir
 pval_thresh = args$pcutoff
+min_count = args$mincount
 
 file_df <- read.csv(file_name, header=TRUE, sep='\t')
 
@@ -55,7 +57,7 @@ for (dos in c('pos', 'neg')) {
   # enrich_result = enrich_res@result
   # enrich_result = gofilter(enrich_res, level=4)
   # enrich_filt = simplify(enrich_res, cutoff=0.5, by="p.adjust", select_fun=min)
-  enrich_filt = enrich_res
+  enrich_filt = gsfilter(enrich_res, by = 'Count', min = min_count)
   enrich_result = enrich_filt@result
 
   # enrich_out_file = paste0(enrich_outdir, dos, '.enrichGO.tsv')
